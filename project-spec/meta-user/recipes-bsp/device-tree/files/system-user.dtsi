@@ -1,0 +1,24 @@
+/include/ "system-conf.dtsi"
+/ {
+chosen {
+       bootargs = "console=ttyPS0,115200 earlyprintk uio_pdrv_genirq.of_id=generic-uio root=/dev/mmcblk0p2 rw rootwait";
+    };
+};
+&debug_bridge_0 {
+			compatible = "generic-uio";
+		};
+&axi_ethernet_0 {
+    /*local-mac-address = [00 0a 35 00 01 22];*/
+    phy-handle = <&phy0>;
+    xlnx,has-mdio = <0x1>;
+    phy-mode = "rgmii-id";
+    axi_ethernet_0_mdio: mdio {
+        #address-cells = <1>;
+        #size-cells = <0>;
+        phy0: phy@4 {
+            /*compatible = "marvell,88e1510";*/
+            device_type = "ethernet-phy";
+            reg = <4>;
+        };
+    };
+};
